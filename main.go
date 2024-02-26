@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/kushagra-gupta01/Poker_game_engine/deck"
+)
 
 func main() {
-	fmt.Print("hello world")
+d:= deck.New()
+	fmt.Print(d)
 }
