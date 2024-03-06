@@ -2,18 +2,13 @@ package p2p
 
 import (
 	"bytes"
-	"io"
-	"net"
 	"github.com/sirupsen/logrus"
+	"net"
 )
 
-type Message struct {
-	Payload io.Reader
-	From    net.Addr
-}
-
 type Peer struct {
-	conn net.Conn
+	conn     net.Conn
+	outbound bool
 }
 
 func (p *Peer) Send(b []byte) error {
@@ -68,10 +63,10 @@ func (t *TCPTransport) ListenAndAccept() error {
 		}
 
 		peer := &Peer{
-			conn: conn,
+			conn:     conn,
+			outbound: false,
 		}
 
 		t.AddPeer <- peer
 	}
-	return nil
 }
